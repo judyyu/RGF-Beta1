@@ -8,7 +8,7 @@ development:
   database: RGF_dev
   pool: 5
   username: root
-  password: hsc208
+  password: safew
   timeout: 5000
 
 # Warning: The database defined as "test" will be erased and
