@@ -8,7 +8,7 @@ development:
   database: RGF_dev
   pool: 5
   username: root
-  password: hsc208
+  password: safew
   timeout: 5000
 
 # Warning: The database defined as "test" will be erased and
@@ -23,10 +23,10 @@ test:
   timeout: 5000
 
 production:
-  adapter: mysql2 
-  database: RGF_production
-  pool: 5
-  username: root
-  password: safew
-  timeout: 5000
+   adapter: postgresql
+   encoding: unicode
+   database: RGF_dev
+   username: postgres
+   password: "#{ENV['POSTGRESQL_PASSWORD']}"
+
 
