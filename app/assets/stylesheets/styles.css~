@@ -61,7 +61,7 @@ img.alignright {
 /* Hx tags */
 
 @font-face {
-	font-family: 'Gabriola';
+	font-family: '206094_0_0';
 	src: url('../webfonts/206094_0_0');
 	src: local("☺"),
 			 url('../webfonts/206094_0_0.woff') format('woff'),

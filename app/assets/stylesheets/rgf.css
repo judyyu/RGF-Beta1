@@ -1,0 +1,14 @@
+.footer {
+	margin:0;
+	padding:10px;
+	left:0;
+	right:0;
+	width:100%;	
+	background-color:#fafafa;
+	bottom:0;
+}
+
+.fixed-btn {
+	margin-bottom:10px;
+}
+

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Real Good Food - Always Eat Awesome</title>
+	<%= javascript_include_tag "jquery-1.7.2.min.js" %>	
+	<%= stylesheet_link_tag "rgf.css" %>
+        <%= stylesheet_link_tag "facebox.css" %>
+	<%= javascript_include_tag "facebox.js" %>
+	<%= javascript_include_tag "bootstrap/js/bootstrap.min.js" %>
+	<%= stylesheet_link_tag "bootstrap/css/bootstrap.css" %>
+	<%= stylesheet_link_tag "MyFontsWebfontsKit.css" %>
+	<%= stylesheet_link_tag "buttons.css" %>
+
+	<script type="text/javascript">
+	/*$(window).load(function(){
+			$('#info').modal('show');
+			$('#info').modal({
+					keyboard: false,
+					backdrop:static});
+	});*/
+
+	jQuery(document).ready(function($) {
+		if ($("#selected_location").val()==''){
+		  	$("a[rel*=facebox]").facebox();
+			$.facebox("#info","facebox",true);
+			$.facebox.settings.closeImage = 'assets/closelabel.png';
+			$.facebox.settings.opacity = 1.0;
+		}
+	})
+
+	$(function() {
+		$(".location").click(function(){
+			console.log("trigger");		
+			show_location = $(this).attr("id");	
+			$("#selected_location").val(show_location);
+			$(document).trigger('close.facebox');		
+		
+		});
+	});
+	</script>
+
+	<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+<body>
+
+<!-- panel that asks for location -->
+<div id="info" style="display:none;">
+    <div class="modal-header">	
+	<h4>Where are you located?</h4>	
+    </div>
+    <div class="modal-body" align="center" style="min-height:550px;">	
+	
+      <section style="width:680px; background-color:#FFFFFF; padding:20px;">
+	<div class="location" id="aa"><img src="assets/aa.jpg" border="0" width="450"></div>
+	<br>
+	<div class="location" id="durham"><img src="assets/durham.jpg" border="0" width="450"></div>
+      </section>
+    </div>
+    <div class="modal-footer">
+	Sign up for our newsletter and we will inform you if your location is added.
+    </div>
+</div>
+<!-- end location panel -->
+
+<div class="container-fluid">
+
+<!-- logo -->
+<div class="span2" style="margin-top:60px;">
+	<img src="images/logo.jpg" />
+</div>
+
+<div class="span9" style="margin-top:10px;">	
+
+	<!-- nav -->
+	<ul class="nav nav-tabs">
+			<li class="active"><a href="/">Home</a></li>
+                        <li><%= link_to "Events", events_path %></li>
+                        <li><%= link_to "Listings", listings_path %></li>
+                        <li><%= link_to "Groups", groups_path %></li>
+ 			<li><a href="/blogs">Blog</a></li>
+ 			<li><a href="/users/sign_up">Join Us</a></li>
+
+	</ul>
+
+	
+	<!-- featured content -->
+	<div class="hero-unit">
+		<h1>Eat Awesome</h1>
+		<p>
+		<p><a class="btn btn-primary btn-large" href="/users/sign_up">Register >></a></p>
+	</div>
+
+	<div class="row">	
+	   <div class="span3">      
+		<%= link_to image_tag("meal.png"), listings_path %> 
+		<h3><%= link_to "Discover and Eat Food", listings_path %></h3> 
+	      	<p>Find Food, Be a locavore or Share your food creations with your local community. Spread love, kindness and brotherhood</a> </p> 
+
+		
+	   </div>
+
+	   <div class="span3">
+	       <a href="/events"><%=link_to image_tag("calendar.png"), events_path %></a> 
+	       <h3><%= link_to "Create and Attend Events", events_path %></h3> 
+	      <p>Find events happening near you, attend cook offs, learn recipes or host one to flaunt what you cook the best. </p> 
+	    </div>
+
+	    <div class="span3">
+	       <a href="/groups"><%=link_to image_tag("users.png"), groups_path %></a> 
+	       <h3><%= link_to "Join or Start a Group", groups_path %></h3> 
+	      <p>Create a food community in your area, be a food activist or join an existing movment. Enjoy lovely food all the time </p> 	       
+	    </div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="span3">
+			<a href="/listings" class="button yellow">GO</a>   
+		</div>
+		<div class="span3">
+			<a href="/events" class="button yellow">GO</a> 
+		</div>
+		<div class="span3">
+			<a href="/groups" class="button yellow">GO</a>
+		</div>
+	</div>
+<br clear="left">
+<hr>	
+	<div class="row footer">
+	<div class="span3">	
+	<footer>
+	    <h3>Join Our Mailing List</h3>   
+		<!-- Begin MailChimp Signup Form -->		
+		<div id="mc_embed_signup">
+		<form action="http://realgoodfood.us4.list-manage.com/subscribe/post?u=2d63e728661a8327567030229&amp;id=48f9c5b9dd" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+			<!-- <label for="mce-EMAIL"></label> -->
+			<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+			<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+		<input type="hidden" id="selected_location" value="">
+		</form>
+		</div>
+		<!--End mc_embed_signup-->
+	</div>
+
+
+	<div class="span3">
+		<h3>About RGF</h3>
+		<ul>
+		    <li><a href="/pages/how-it-works" title="your site name">How It Works</a></li>
+		    <li><a href="/pages/team">Team</a></li>
+		    <li><a href="/pages/privacy-policy">Privacy Policy</a></li>
+		    <li><a href="/pages/terms-and-conditions">Terms and Conditions</a></li>
+		</ul>
+	</div>
+	</footer>
+	</div>
+</div>
+
+</body>
+</html>
+

@@ -12,4 +12,7 @@ class HomeController < ApplicationController
   end
   def terms_and_conditions 
   end
+  def welcome	
+	render :layout =>'splash.html.erb'
+  end
 end

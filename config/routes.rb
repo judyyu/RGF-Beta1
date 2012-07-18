@@ -14,15 +14,16 @@ RealGoodFood::Application.routes.draw do
 
   resources :blogs
 
-  root :to => 'dashboards#index'
+  
+ 
 
   get 'accept_user_to_events' => "user_to_events#accept", :as => 'accept_user_to_event'
   get 'reject_user_to_events' => "user_to_events#reject", :as => 'reject_user_to_event'
-
-
+ 
+  
   #resources :events
 
-resources :events do
+  resources :events do
      member do
        #post :rate
        get  :join
@@ -37,7 +38,7 @@ resources :events do
   resources :groups
   resources :comments
   resources :listings
-  get 'home/index' 
+  #get 'home/index' 
   #resources :friendships
   get 'friend_ship' => "friendships#create", :as => "friend_ship"
   get 'user_to_groups' => "user_to_groups#create", :as => "user_to_groups"
@@ -48,6 +49,8 @@ resources :events do
     resources :friends
   end
 
+  root :to => 'home#welcome'
+  #root :to => 'dashboards#index'
 
 
 

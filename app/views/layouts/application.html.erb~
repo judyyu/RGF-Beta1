@@ -124,6 +124,7 @@
               <% else %>
                 <li style ="margin-left:430px;"><%= link_to 'LOGIN', new_user_session_path %></li> 
                 <li><%= link_to 'REGISTER',new_user_registration_path %></li>
+
             </ul>
               <% end %>              <% end %>
 
