@@ -8,8 +8,8 @@ RealGoodFood::Application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
-  #resources :static_pages 
-  # match "/static_pages/*id" => 'static_pages#show', :as => :page, :format => false
+  resources :static_pages 
+  #match "/static_pages/*id" => 'static_pages#show', :as => :page, :format => false
   get "friends/index"
 
   resources :blogs

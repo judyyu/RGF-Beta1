@@ -64,6 +64,7 @@
 
 <div class="container-fluid">
 
+
 <!-- logo -->
 <div class="span2" style="margin-top:60px;">
 	<img src="images/logo.jpg" />
@@ -78,7 +79,12 @@
                         <li><%= link_to "Listings", listings_path %></li>
                         <li><%= link_to "Groups", groups_path %></li>
  			<li><a href="/blogs">Blog</a></li>
- 			<li><a href="/users/sign_up">Join Us</a></li>
+ 			<li><a href="/pages/sign_up">Join Us</a></li>
+			
+
+			<div style="float:right;padding-top:10px;">
+			<%= link_to 'My Profile', profile_path(current_user.profile.slug), :class=>'top_btn_underline' %> <a class="top_btn_underline" href="/users/settings">Settings</a>  <a class="top_btn_underline" href="/users/profile">Logout</a> 
+			</div>
 
 	</ul>
 
@@ -87,7 +93,8 @@
 	<div class="hero-unit">
 		<h1>Eat Awesome</h1>
 		<p>
-		<p><a class="btn btn-primary btn-large">Register >></a></p>
+		<p><a class="btn btn-primary btn-large" href="/users/sign_up">Register >></a>
+		<a class="btn btn-primary btn-large" href="/static_pages/new-to-this-site">New to this site?</a></p>
 	</div>
 
 	<div class="row">	

@@ -7,12 +7,14 @@
 <br>   
 
 <div class ="floatright">
-<p><% if @profile.photo.exists? then %>
-<pre>  <%= image_tag(@profile.photo.url(:small)) %>
+<% if @profile.photo.exists? then %>
+<!--
+<pre><%= image_tag(@profile.photo.url(:small)) %></pre>
+-->
 <h3>About your cooking interests</h3>
-  <b><%= @profile.about_me %></b></pre>
+  <b><%= @profile.about_me %></b>
 <% else %>
-    <pre> <%= image_tag("../images/gravatar-60-giveo.jpg",:size=>"200x200") %>
+   <!-- <pre> <%= image_tag("../images/gravatar-60-giveo.jpg",:size=>"200x200") %> -->
 <h3>About your cooking interests</h3>
   <b><%= @profile.about_me %></b></pre>
 <% end %>
@@ -30,8 +32,9 @@
           <% else %>
           <pre><%= @profile.location.address %></pre>
          <% end %>
-<h5>Personal Contact </h5>
+<!--<h5>Personal Contact </h5>
   <pre><%= image_tag "cell.jpeg",:size =>"20x30" %> : <strong><%= @profile.contact_number %></strong></pre>
+-->
 <br />
 
 
@@ -48,8 +51,8 @@
 <p style = "border:3px solid #333333;width:400px;padding:0px;border-radius:8px;"><%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=14&markers=#{@profile.location.latitude}%2C#{@profile.location.longitude}" %></p>
 <%= link_to "Edit My Location", edit_location_path(@profile.location),  :class => 'btn btn-success'%>
 
-<br>
-<h1>NearBy Groups </h1>
+<br><br>
+<h1>Nearby Groups </h1>
 
 
 
