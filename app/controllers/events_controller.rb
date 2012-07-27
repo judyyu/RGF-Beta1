@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_filter :authenticate_user!
+  #authorize_resource :only => [:index, :show]
   # GET /events
   # GET /events.json
   def index

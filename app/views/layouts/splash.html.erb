@@ -79,8 +79,6 @@
                         <li><%= link_to "Listings", listings_path %></li>
                         <li><%= link_to "Groups", groups_path %></li>
  			<li><%= link_to "Blog", blogs_path  %></li>
- 			<li><a href="/pages/sign_up">Join Us</a></li>
-			
 
 			<div style="float:right;padding-top:10px;">
 			<% if user_signed_in? %>			
@@ -89,21 +87,17 @@
 			<%= link_to 'Sign In', '/users/sign_in', :class=>'top_btn_underline' %>
 			<%end %>
 			</div>
-
 	</ul>
 
-	
 	<!-- featured content -->
-	<div class="hero-unit">
-		<h1>Eat Awesome</h1>
-		<p>
-		<p><a class="btn btn-primary btn-large" href="/users/sign_up">Register >></a>
-		<a class="btn btn-primary btn-large" href="/static_pages/new-to-this-site">New to this site?</a></p>
+	<div class="hero-unit-rgf">		
+		<%= link_to "Register", new_user_registration_path, {:class=>"splash-btn  btn-primary btn-large"} %>		<%= link_to "New to this site?", new_to_this_path, {:class=>"splash-btn  btn-primary btn-large"} %>		
+		<br>
 	</div>
 
 	<div class="row">	
 	   <div class="span3">      
-		<%= link_to image_tag("meal.png"), listings_path %> 
+		<%= link_to image_tag("food.png"), listings_path %> 
 		<h3><%= link_to "Discover and Eat Food", listings_path %></h3> 
 	      	<p>Find Food, Be a locavore or Share your food creations with your local community. Spread love, kindness and brotherhood</a> </p> 
 
@@ -111,13 +105,13 @@
 	   </div>
 
 	   <div class="span3">
-	       <a href="/events"><%=link_to image_tag("calendar.png"), events_path %></a> 
+	       <a href="/events"><%=link_to image_tag("cal.png"), events_path %></a> 
 	       <h3><%= link_to "Create and Attend Events", events_path %></h3> 
 	      <p>Find events happening near you, attend cook offs, learn recipes or host one to flaunt what you cook the best. </p> 
 	    </div>
 
 	    <div class="span3">
-	       <a href="/groups"><%=link_to image_tag("users.png"), groups_path %></a> 
+	       <a href="/groups"><%=link_to image_tag("group.png"), groups_path %></a> 
 	       <h3><%= link_to "Join or Start a Group", groups_path %></h3> 
 	      <p>Create a food community in your area, be a food activist or join an existing movment. Enjoy lovely food all the time </p> 	       
 	    </div>

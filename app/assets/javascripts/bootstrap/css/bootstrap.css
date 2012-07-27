@@ -2736,12 +2736,12 @@ button.close {
 .btn-primary {
   background-color: #0074cc;
   *background-color: #0055cc;
-  background-image: -ms-linear-gradient(top, #0088cc, #0055cc);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0055cc));
-  background-image: -webkit-linear-gradient(top, #0088cc, #0055cc);
-  background-image: -o-linear-gradient(top, #0088cc, #0055cc);
-  background-image: -moz-linear-gradient(top, #0088cc, #0055cc);
-  background-image: linear-gradient(top, #0088cc, #0055cc);
+  background-image: -ms-linear-gradient(top, #459131, #357526);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#459131), to(#357526));
+  background-image: -webkit-linear-gradient(top, #459131, #357526);
+  background-image: -o-linear-gradient(top, #459131, #357526);
+  background-image: -moz-linear-gradient(top, #459131, #357526);
+  background-image: linear-gradient(top, #459131, #357526);
   background-repeat: repeat-x;
   border-color: #0055cc #0055cc #003580;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
@@ -4941,6 +4941,7 @@ a.badge:hover {
 .hero-unit {
   padding: 60px;
   margin-bottom: 30px;
+  background:url("/images/banner.jpg") no-repeat;
   background-color: #d4e4b4;
   -webkit-border-radius: 6px;
      -moz-border-radius: 6px;

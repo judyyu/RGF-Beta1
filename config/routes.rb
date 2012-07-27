@@ -11,12 +11,13 @@ RealGoodFood::Application.routes.draw do
   
   resources :static_pages 
   #match "/static_pages/*id" => 'static_pages#show', :as => :page, :format => false
+ 
+  #static pages
+  match '/new_to_this', :to=>'pages#new_to_this'
+
   get "friends/index"
 
   resources :blogs
-
-  
- 
 
   get 'accept_user_to_events' => "user_to_events#accept", :as => 'accept_user_to_event'
   get 'reject_user_to_events' => "user_to_events#reject", :as => 'reject_user_to_event'

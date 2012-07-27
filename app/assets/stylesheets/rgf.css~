@@ -13,8 +13,26 @@
 }
 
 .top_btn_underline {
-	text-decoration:underline;
 	padding-right:10px;
 	font-size:12px;
 	color:#929292;
+}
+
+.hero-unit-rgf {
+  height: 240px;
+  margin-bottom: 30px;
+  margin-top:0px;
+  background:url("/images/banner.jpg") no-repeat;
+  background-color: #d4e4b4;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+}
+
+.splash-btn {
+  margin-top:200px;
+  background-color:#fefefe;	
+  margin-left:10px;
+
+
 }
