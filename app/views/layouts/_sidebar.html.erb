@@ -1,0 +1,57 @@
+<div class="row">	
+	   <div class="span2">  
+<% if current_user %>
+<% if current_user.profile.nil? %>
+         <%= image_tag("../images/gravatar-60-giveo.jpg") %>
+<% else %>
+      <% unless current_user.profile.photo? %>
+          <%= image_tag("../images/gravatar-60-giveo.jpg") %>
+      <% else %>
+         <%= image_tag current_user.profile.photo.url(:profile)  %>
+<% end %>
+<% end %>
+</div>
+		
+            <% unless current_user.profile.nil? %>
+<ul class="nav nav-pills">
+<li class="dropdown">
+  <a href="#" data-toggle="dropdown" class="dropdown-toggle"><%= current_user.profile.full_name %> <b class="caret"></b></a>
+  <ul class="dropdown-menu" id="menu1">
+    <li><%= link_to 'My Dashboard', dashboards_path %></li>
+    <li><%= link_to 'My Profile', profile_path(current_user.profile.slug) %></li>
+    <li><%= link_to 'Change Password', edit_user_registration_path %> </li>
+    <li><%= link_to 'Add a Food Listing', new_listing_path %> </li>
+    <li><%= link_to 'Add an Event', new_event_path %></li>
+    <li class="divider"></li>
+    <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+  </ul>
+</li>
+</ul>
+<% end %>
+          </div>
+        </div>
+      </div>
+      <div class="right-box-border">
+        <div class="right-box-main">
+          <br><br><ul id="test-list">
+            <li style ="display:block">
+
+        </div>
+      </div><br><br>
+
+      <div class="right-box-border">
+        <div class="right-box-main"><h3>Latest Events</h3><br>
+          <div class="inner-left-right-side-title" style ="border-radius:10px;border:1px solid silver;padding:10px">
+           <% Event.find(:all).each do |e| %>
+          <%= link_to image_tag(e.photo.url(:icon)),e  %>
+           <div style = "margin:-55px 20px 0px 50px;padding:10px;text-style:bold">
+                <b><%= link_to e.name, e %></b><br>
+                <%= time_tag e.event_starting_on %><br>
+                <%=  e.address %>
+          </div>
+          <hr />
+          <% end %><% end %></div></div><br><br>
+      </div>
+    </div>
+
+</ul>
