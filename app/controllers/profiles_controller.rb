@@ -24,17 +24,15 @@ class ProfilesController < ApplicationController
   # GET /profiles/1
   # GET /profiles/1.json
   def show
-    pro = Profile.where(:user_id => params[:id])
-    
-    
-	if pro != nil
-		@profile = Profile.find(params[:id])
+	@profile = Profile.find_by_user_id(params[:id])
+    if @profile.nil?
+		redirect_to new_profile_path
+	else
+		@profile = Profile.find_by_user_id(params[:id])
 		 respond_to do |format|
 		  format.html # show.html.erb
-		  format.json { render json: @profile }
+		  format.json { render json: @profile }	
 		end
-    else
-		redirect_to new_profile_path
     end
     #@groups = Group.find(:all, :order => "id desc", :limit => 5).reverse
     #@groups = Group.limit(5).order('id desc')

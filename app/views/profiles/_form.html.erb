@@ -69,8 +69,7 @@ background-color: #006DCC;
   <% for rest in FoodRestriction.find(:all) %>
    <br><!--<%= check_box_tag( 'profile[value_ids][]',  rest.id,
        :onClick => "$$('#my_form input.check').each(function(box){box.checked=($('check_all').checked)?true:false});")%>-->
-       <%= check_box_tag( 'profile[value_ids][]',  rest.id,
-       :onClick => "$$('#my_form input.check').each(function(box){box.checked=($('check_all').checked)?false:true});")%>
+       <%= check_box_tag( 'profile[value_ids][]',rest.id)%>
        <%= rest.name %></p>
 
   <% end %> 
