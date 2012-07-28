@@ -81,10 +81,13 @@
 						<!--<li><%= link_to "Blog", blogs_path  %></li>-->
 
 			<div style="float:right;padding-top:10px;">
-			<% if user_signed_in? %>			
-			<%= link_to 'My Profile', profile_path(current_user), :class=>'top_btn_underline' %> 
-			<%= link_to 'Settings', edit_profile_path(current_user), :class=>'top_btn_underline' %> 
-			<%= link_to 'Log Out', destroy_user_session_path, :method=> :delete, :class=>'top_btn_underline' %>  
+			<% if user_signed_in? %>
+			<% if current_user.profile.nil? %>			
+				<%= link_to 'Create Profile', new_profile_path, :class=>'top_btn_underline' %> 
+			<% else %>
+				<%= link_to 'My Profile', profile_path(current_user.profile.slug), :class=>'top_btn_underline' %> 
+			<% end %>			
+			<%= link_to 'Log Out', destroy_user_session_path, :class=>'top_btn_underline', :method=> :delete %>  
 			<% else %>
 			<%= link_to 'Sign In', new_user_session_path, :class=>'top_btn_underline' %>
 			<%end %>

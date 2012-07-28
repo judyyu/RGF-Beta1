@@ -51,7 +51,7 @@ CKEDITOR.editorConfig = function( config )
   /* Toolbars */
   config.toolbar = 'Easy';
   
-  config.toolbar_Easy =
+  /*config.toolbar_Easy =
     [
         ['Source','-','Preview'],
         ['Cut','Copy','Paste','PasteText','PasteFromWord',],
@@ -61,5 +61,14 @@ CKEDITOR.editorConfig = function( config )
         ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
         ['Link','Unlink','Anchor'], ['Image', 'Attachment', 'Flash', 'Embed'],
         ['Table','HorizontalRule','Smiley','SpecialChar','PageBreak']
+    ];*/
+    config.toolbar_Easy =
+    [
+        ['Cut','Copy','Paste','PasteText','PasteFromWord',],
+        ['Undo','Redo','-','SelectAll','RemoveFormat'],
+        ['Styles','Format'], ['Subscript', 'Superscript', 'TextColor'], ['Maximize','-','About'], '/',
+        ['Bold','Italic','Underline','Strike'], ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote']
+        
     ];
+    
 };

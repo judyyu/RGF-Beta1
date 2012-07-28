@@ -1,60 +1,67 @@
-
-<h1><%= @profile.full_name %></h1>
-<% if @profile.user_id != current_user.id %>
-
-<% else %>
-<h6>[<%= link_to 'Edit Profile', edit_profile_path(@profile) %>]</h6>
+<% if user_signed_in?  %>
+<% if @profile.user_id == current_user.id %>
+<h6>[<%= link_to 'Edit Profile', edit_profile_path(current_user.profile.slug) %>]</h6>
 <% end %>
-<br>   
-
-<div class ="floatright">
-<% if @profile.photo.exists? then %>
-<pre><%= image_tag(@profile.photo.url(:small)) %></pre>
-
-<b>About your cooking interests</b>
-  <b><%= @profile.about_me %></b>
-<% else %>
-   <!-- <%= image_tag("../images/gravatar-60-giveo.jpg",:size=>"200x200") %> -->
-   <pre> 
-   <h3>About your cooking interests</h3>
-  <b><%= @profile.about_me %></b></pre>
 <% end %>
+
+<div class ="hero-unit-internal">
+<div class="row">
+	<div class="span2">
+	<% if @profile.photo.exists? then %>
+	<pre><%= image_tag(@profile.photo.url(:small)) %></pre>
+	<% else %>
+	<%= image_tag("../images/gravatar-60-giveo.jpg",:size=>"100x100") %>
+	<%end %>
+	</div>
+	<div class="span4">
+		<h1><%= @profile.full_name %></h1>
+		<br>
+	    <h4>Cooking Interests</h4>
+	    <br><b><%= @profile.about_me %></b>
+	</div>
 </div>
-<br>
+</div>
    
 
-  <h4>About your favorite foods</h4><br>
-     <pre style ="color:green;width:200px;line-height:10%;font-size:13px;"><% @profile.values.each do |f| %>
-        <p style = "margin-left:30px;font-size:12px;"><%= f.name %></p>
-     <% end %></pre>
- <h5>My location</h5>
-          <% if @profile.location.nil? %>
-            <pre>NO address specified .</pre>
-          <% else %>
-          <pre><%= @profile.location.address %></pre>
-         <% end %>
-<!--<h5>Personal Contact </h5>
-  <pre><%= image_tag "cell.jpeg",:size =>"20x30" %> : <strong><%= @profile.contact_number %></strong></pre>
--->
-<br />
+<div class="row">
+	<div class="span4 round-box-internal">
+	  <h4>About your favorite foods</h4><br>
+		 <% @profile.values.each do |f| %>
+			<p style = "margin-left:30px;font-size:12px;"><%= f.name %></p>
+		 <% end %>
+	</div>
 
+	<div class="span4 round-box-internal">
+	  <h5>My location</h5>
+			  <% if @profile.location.nil? %>
+				<pre>NO address specified .</pre>
+			  <% else %>
+			  <pre><%= @profile.location.address %></pre>
+			 <% end %>
+	</div>
+</div>
 
-<b>Social Links</b>
-<p>
-
-  <a href ="<%= @profile.faceboo_profile_link %>"><%= image_tag "Facebook.png", :size => "30x30" %></a>
-  <a href ="<%= @profile.twitter_profile_link %>"><%= image_tag "Twitter 01.png", :size => "30x30" %></a>
-  <a href ="<%= @profile.linked_in_profile_link %>"><%= image_tag "LinkedIn.png", :size => "30x30" %></a>
-  <a href ="<%= @profile.google_plus_link %>"><%= image_tag "Google.png", :size => "30x30" %></a>
-
-</p>
+<% if !@profile.faceboo_profile_link.nil? or !@profile.twitter_profile_link.nil?  or !@profile.linked_in_profile_link.nil? or !@profile.google_plus_link.nil? %>
+<div class="row">
+	<div class="span4 round-box-internal">
+	<b>Social Links</b>
+	  <br>
+	  <% if !@profile.faceboo_profile_link.empty? %><a href ="<%= @profile.faceboo_profile_link %>"><%= image_tag "Facebook.png", :size => "30x30" %></a><% end %>
+	  <% if !@profile.twitter_profile_link.empty? %><a href ="<%= @profile.twitter_profile_link %>"><%= image_tag "Twitter 01.png", :size => "30x30" %></a><% end %>
+	  <% if !@profile.linked_in_profile_link.empty? %><a href ="<%= @profile.linked_in_profile_link %>"><%= image_tag "LinkedIn.png", :size => "30x30" %></a><% end %>
+	  <% if !@profile.google_plus_link.empty? %><a href ="<%= @profile.google_plus_link %>"><%= image_tag "Google.png", :size => "30x30" %></a><% end %>
+	</div>
+</div>
+<% end %>
+<br>
 
 <% if !@profile.location.nil? %>
-<p style = "border:3px solid #333333;width:400px;padding:0px;border-radius:8px;"><%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=14&markers=#{@profile.location.latitude}%2C#{@profile.location.longitude}" %></p>
-<%= link_to "Edit My Location", edit_location_path(@profile.location),  :class => 'btn btn-success'%>
+	<p style = "border:3px solid #333333;width:400px;padding:0px;border-radius:8px;"><%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=14&markers=#{@profile.location.latitude}%2C#{@profile.location.longitude}" %></p>
+	<% if @profile.user_id == current_user.id %>
+	<%= link_to "Edit My Location", edit_location_path(@profile.location),  :class => 'btn btn-success'%>
+	<% end %>
 <% end %>
-<br><br>
-<h1>Nearby Groups </h1>
+
 
 
 

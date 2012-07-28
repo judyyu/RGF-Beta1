@@ -25,12 +25,17 @@
         <li <% if  controller.controller_name =='groups' %>class="active"<%end%>><%= link_to "Groups", groups_path %></li>
  	<!--<li <% if  controller.controller_name =='blogs' %>class="active"<%end%>><%= link_to "Blog", blogs_path  %></li>-->
         <li <% if controller.controller_name =='sessions' or controller.controller_name =='registrations' or controller.controller_name =='profiles' %>class="active"<%end%>>
-	<% if  user_signed_in? %>
-	<%= link_to "Profile", profile_path(current_user)  %>
-	<% else %>	
-	<%= link_to "Sign In", new_user_session_path  %>
-	<% end %>
+	
 	</li>	
+	<div style="float:right;padding-top:10px;">
+	<% if user_signed_in? %>	
+		<% if current_user.profile.nil? %>			
+			<%= link_to 'Create Profile', new_profile_path, :class=>'top_btn_underline' %> 
+		<% end %>
+	<% else %>
+		<%= link_to "Sign In", new_user_session_path  %>
+	<% end %>
+	</div>
 	<% if user_signed_in? %>
 	<div style="float:right;height:20px;">
 			
@@ -49,9 +54,7 @@
 		  </ul>
 		</li>
 		</ul>	
-		<% else %>
-			<%= link_to "Create Profile", new_profile_path %>
-	    <% end %>
+		<% end %>		
 	</div>
 	<% end %>	
 	</ul>
@@ -81,8 +84,16 @@
 </div>
 
 <div class="row">
-<div class="span9"><%= yield %></div>
+<div class="span9">
+	<%= yield %>
+	<%= render 'layouts/footer' %> 
+</div>	
 </div>
+
+<br>
+
+
+
 <div class="row" style="margin-left:200px;"><div class="span9"><%= debug(params) if Rails.env.development? %></div></div>
 
 

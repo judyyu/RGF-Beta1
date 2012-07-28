@@ -6,11 +6,11 @@
     <div id="error_explanation">
       <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
 
-      <ul>
+      
       <% @profile.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
-      </ul>
+     
     </div>
   <% end %>
 
@@ -62,11 +62,12 @@ background-color: #006DCC;
   </div>
 
 <div class="field">
-<tr><td><br>
-      <strong><%= f.label :'Food_Preference:' %></strong><br /><br />
-           <% for category in Value.find(:all) %>
-           <p><%= check_box_tag( 'profile[value_ids][]',  category.id,
-         :onClick => "$$('#my_form input.check').each(function(box){box.checked=($('check_all').checked)?true:false});")%>
+<tr><td>
+	<br>
+      <strong><%= f.label :'Food_Preference:' %></strong><br />     
+           <% for category in Value.find(:all) %>           
+           <%= check_box_tag( 'profile[value_ids][]',  category.id,
+         @food_restrictions.include?(category.id) ? true:false)%>
            <%= category.name %></p>
          <% end %>  </div>
 </td></tr>
@@ -121,5 +122,4 @@ background-color: #006DCC;
 <% end %>
 </table>
 </div>
-<%= link_to 'Show', @profile %> |
-<%= link_to 'Back', profiles_path %>
+<%= link_to 'Cancel', @profile %> 

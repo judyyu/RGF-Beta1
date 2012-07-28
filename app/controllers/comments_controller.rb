@@ -37,6 +37,7 @@ class CommentsController < ApplicationController
   
   def edit
     @comment = Comment.find(params[:id])
+    @listing = Listing.find(@comment.listing_id)
   end
   
   def update

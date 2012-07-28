@@ -1,10 +1,3 @@
-<div class ="pull-right">
-
-<% if @listing.photo.exists? then %>
-	<%= image_tag(@listing.photo.url(:small)) %>
-<% end %>
-</div>
-
 <% if user_signed_in? %>
 <b>
 <% if @listing.user_id == current_user.id %>
@@ -12,60 +5,65 @@
   <%= link_to 'Remove', @listing, :confirm => 'Are you sure?', :method => :delete,  :class => 'btn btn-success' %> 
   <%= link_to 'View All Listings', listings_path, :class => 'btn btn-success' %>
 <% else %>
-  <%= link_to 'View All Listings', listings_path, :class => 'btn btn-mini' %>
+  <!--<%= link_to 'View All Listings', listings_path, :class => 'btn btn-success' %>  -->
 <% end %>
 </b>
 <%end%>
 
-<div class ="content">
-<br><br>
-  <h3 style ="color:#3B2501"><%= @listing.title %></h3>
-<br>
-
-<p>
-<b>Food category:</b>
-  <%= @listing.food_category.nil? ? "No category" : @listing.food_category.name %>
-</p>
-<br>
-
-<p>
-<b>Description:</b>
-  <%= @listing.description.html_safe %>
-</p>
-<br>
-
-<p>
-<b>Start date:</b>
-  <%= time_tag @listing.start_date %>
-</p>
-<br>
-
-<p>
-<b>End date:</b>
-<%= time_tag @listing.end_date %>
-</p>
-<br>
-
-<b>Food type:</b><br />
-<ol><% @listing.tags.each do |f| %>
-<li><%= f.name %></li>
-<% end %></ol>
-<br>
-
-<p>
-<b>Availablity Duration:</b>&nbsp;&nbsp;
-<% if ( @listing.end_date - Date.today() ).to_i < 0 %>
-<p style = color:darkorange;font-size:20px> <b>"Sorry !..this Listing Has Expired "</b> </p>
-<% else %>
-<%= distance_of_time_in_words(Time.now, @listing.end_date +  50.minute) %></td>
+<div class="hero-unit-internal">
+<div class ="pull-right">
+<% if @listing.photo.exists? then %>
+	<%= image_tag(@listing.photo.url(:small)) %>
 <% end %>
-</p>
+</div>
+<b><%= @listing.food_category.nil? ? "" : "Food category:  " + @listing.food_category.name %> </b>
 <br>
+<h3 style ="color:#3B2501"><%= @listing.title %></h3>
+<br>Listed by : <%= link_to @profile.full_name, profile_path(@profile) %>
+</div>
 
-<p>
-<b>Suggested Storage:</b>
-<%= @listing.eat_by_date.name if !@listing.eat_by_date.nil? %>
-</p>
+<div class="row ">
+	<div class="span4 round-box-internal">
+	<b>Description</b>
+	 <br><%= @listing.description.html_safe %>
+	</div>
+
+	<div class="span4 round-box-internal">
+	<b>Start date</b>
+	  <%= time_tag @listing.start_date %>
+	<p>
+	<b>End date</b>
+	<%= time_tag @listing.end_date %>
+	</p>  
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="span4 round-box-internal">
+	<b>Food type</b><br />
+	<ol><% @listing.tags.each do |f| %>
+	<li><%= f.name %></li>
+	<% end %></ol>
+	</div>
+
+	<div class="span4 round-box-internal">
+	<b>Availablity Duration</b>&nbsp;&nbsp;
+	<% if ( @listing.end_date - Date.today() ).to_i < 0 %>
+	<p style = color:darkorange;font-size:20px> <b>"Sorry !..this Listing Has Expired "</b> </p>
+	<% else %>
+	<%= distance_of_time_in_words(Time.now, @listing.end_date +  50.minute) %></td>
+	<% end %>
+	</p>
+	</div>
+</div>
+
+<div class="row">
+	<div class="span4 round-box-internal">
+	<b>Suggested Storage</b>
+	<%= @listing.eat_by_date.name if !@listing.eat_by_date.nil? %>
+	</div>
+</div>
 <hr>
 
 <p style = "border:3px solid #333333;width:400px;padding:0px;border-radius:8px;">
@@ -73,10 +71,7 @@
 </p>
 <br />
 
-
-  <b> 
-	<%= pluralize(@listing.comments.size, 'comment') %>
-  </b>
+<b><%= pluralize(@listing.comments.size, 'comment') %></b>
   <% if !user_signed_in? %>
 	<%= link_to 'Log in to add comments', new_user_session_path, :class=>'top_btn_underline' %>
   <% end %>
@@ -114,44 +109,51 @@ color:#000000;
 </style>
 
 <% for comment in @listing.comments %>
-<% if user_signed_in? %>
 <div id ="comment">
+<% if user_signed_in? %>
+
 	 <div id ="avatar" style ="padding-left:25px;padding:20px;">
-		  <% unless @comment.listing.user.profile.photo? %>
-			  <%= image_tag("../images/gravatar-60-giveo.jpg",:size =>"50x50") %>
+	
+		  <% unless comment.user.profile.photo? %>
+			  <%= image_tag("../images/gravatar-60-giveo.jpg",{:size =>"50x50", :class=>"pull-left"}) %>
 		  <% else %>
-			 <%= image_tag @comment.listing.user.profile.photo.url(:profile)  %>
+			 <%= image_tag comment.user.profile.photo.url(:profile)  %>
 		  <% end %>
 
-		  <!--<strong style  = color:blue>
+		 <!--<strong style  = color:blue>
 			 <%= h comment.user.email  %>
 		 </strong>-->
-		 <em>on <%= comment.created_at.strftime('%b %d, %Y at %H:%M') %></em>
+		 <%= link_to comment.user.profile.full_name, profile_path(comment.user.profile) %>
+		 <br>
+		 <em><%= comment.created_at.strftime('%m/%d/%y at %h:%M') %></em>
 	</div>
 	<div id ="content">
 		<%=  comment.body.html_safe %><hr />
+		<!--<%= comment.user_id %> <%= current_user.id %>-->
 		<% if comment.user_id == current_user.id %>
 		 <b><%= link_to 'Edit Comment', edit_comment_path(comment) %></b>
 		<% end %>
 	</div>
 <% else %>
 	<div id ="avatar" style ="padding-left:25px;padding:20px;">
-		  <% unless @comment.listing.user.profile.photo? %>
-			  <%= image_tag("../images/gravatar-60-giveo.jpg",:size =>"50x50") %>
+		  <% unless comment.user.profile.photo? %>
+			  <%= image_tag("../images/gravatar-60-giveo.jpg",{:size =>"50x50", :class=>"pull-left"}) %>			  
 		  <% else %>
-			 <%= image_tag @comment.listing.user.profile.photo.url(:profile)  %>
+			 <%= image_tag comment.user.profile.photo.url(:profile)  %>
+
 		  <% end %>
-		  
-		 <em>on <%= comment.created_at.strftime('%b %d, %Y at %H:%M') %></em>
+		  <%= link_to comment.user.profile.full_name, profile_path(comment.user.profile) %>
+		  <br>
+		   <em><%= comment.created_at.strftime('%m/%d/%y at %h:%M') %></em>
 	</div>
 	<div id ="content">
 		<%=  comment.body.html_safe %><hr />	
 	</div>
 <% end %>
-
+</div>
 <% end %>
 
-</div>
+<br clear="left">
 <% if user_signed_in? %>
 <%= render :partial => 'comments/form' %>
 <%end%>

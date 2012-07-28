@@ -11,26 +11,28 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :location_name %><br />
-    <%= f.text_field :address %>
+  <br>
+	
+  <div class="row">
+  <div class="span2 heavy"><%= f.label :location_name %></div><div class="span3"><%= f.text_field :address %></div>
   </div>
-  <div class="field">
-    <%= f.label :street %><br />
-    <%= f.text_field :street %>
+  
+  <div class="row">
+  <div class="span2 heavy"><%= f.label :street %></div><div class="span3"><%= f.text_field :street %> </div>
   </div>
-  <div class="field">
-    <%= f.label :city %><br />
-    <%= f.text_field :city %>
+  
+  <div class="row">
+  <div class="span2 heavy"><%= f.label :city %></div><div class="span3"><%= f.text_field :city %></div>
   </div>
-  <div class="field">
-    <%= f.label :zip %><br />
-    <%= f.text_field :zip %>
+  
+  <div class="row">
+  <div class="span2 heavy"><%= f.label :zip %></div><div class="span3"><%= f.text_field :zip %></div>
   </div>
-  <div class="field">
-    <%= f.label :state %><br />
-    <%= f.text_field :state %>
+  
+  <div class="row">
+  <div class="span2 heavy"><%= f.label :state %></div><div class="span3"><%= f.text_field :state %></div>
   </div>
+  
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -70,12 +70,13 @@
             <tr>
 
               <td width="14%" height="25" align="left">
-
+              <% if !@food_restrictions.nil? %>
                   <%= check_box_tag( 'listing[tag_list][]',
-                      v.name,
-                      :onClick => "$$('#my_form input.check').each(function(box)
-                                     {box.checked=($('check_all').checked)?true:false});")%>
+                      v.name, @food_restrictions.include?(v.id) ? true:false)%>
                  <%= v.name %>
+              <% else %>
+					<%= check_box_tag('listing[tag_list][]',v.name)%> <%= v.name %>
+			  <% end %>		
               </td>
 
             </tr>

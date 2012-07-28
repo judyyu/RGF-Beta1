@@ -13,23 +13,19 @@
     </div>
   <% end %>
 
-<table id="hor-minimalist-b" summary="Employee Pay Sheet" >
 
  <%= f.hidden_field :listing_id %>
 
-<tr>
-  <div class="field">
-    <td style =color:green;text-decoration:underline><b><%= f.label :'Add_Your_Comment:' %></b><br />
-    <%= f.cktext_area :body, :toolbar=>'Full', :width=>'600px', :height=>'200px' %></td>
 
+  <div class="field">   
+    <%= f.cktext_area :body, :toolbar=>'Full', :width=>'600px', :height=>'150px' %>
   </div>
-</tr>
 
-<tr>
+<br>
+
   <div class="field">
-    <td><%= f.submit %></td>
+    <%= f.submit %>
   </div>
-</tr>
+
 
 <% end %>
-</table>

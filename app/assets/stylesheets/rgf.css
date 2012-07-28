@@ -36,3 +36,32 @@
 
 
 }
+
+.hero-unit-internal {
+  padding: 60px;
+  margin-bottom: 20px;
+  margin-top: 5px;
+  background-color: #e4f4c4;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+}
+
+.round-box-internal {
+  padding: 10px;
+  margin-bottom: 10px;
+  margin-top: 5px;
+  border:1px #ddd solid;
+  background-color: #f4fAfA;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+}
+
+.lite-gray {
+  color: #999;
+}
+
+.heavy {
+ font-weight:bold;
+}

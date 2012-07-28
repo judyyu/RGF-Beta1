@@ -24,16 +24,19 @@ class ProfilesController < ApplicationController
   # GET /profiles/1
   # GET /profiles/1.json
   def show
-	@profile = Profile.find_by_user_id(params[:id])
+  
+    
+	@profile = Profile.find_or_create_by_slug(params[:id])
+   
     if @profile.nil?
 		redirect_to new_profile_path
-	else
-		@profile = Profile.find_by_user_id(params[:id])
-		 respond_to do |format|
-		  format.html # show.html.erb
-		  format.json { render json: @profile }	
+    else
+		respond_to do |format|
+			format.html # show.html.erb
+			format.json { render json: @profile }	
 		end
-    end
+	end
+    
     #@groups = Group.find(:all, :order => "id desc", :limit => 5).reverse
     #@groups = Group.limit(5).order('id desc')
 
@@ -54,6 +57,12 @@ class ProfilesController < ApplicationController
   # GET /profiles/1/edit
   def edit
     @profile = Profile.find(params[:id])
+    @food_restrictions = Array.new()
+    @profile.values.each do |f|   
+      @food_restrictions.push(f.id)    
+    end
+    #debugger
+    puts @food_restrictions
   end
 
   # POST /profiles

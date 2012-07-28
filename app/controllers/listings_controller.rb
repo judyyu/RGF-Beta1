@@ -4,7 +4,8 @@ class ListingsController < ApplicationController
   #before_filter :authenticate_user!
   def index
     @listings = Listing.all
-
+	#Listing.all :joins=> :users
+	@profiles = Profile.joins(:user)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @listings }
@@ -19,9 +20,10 @@ class ListingsController < ApplicationController
     @tags = Listing.tag_counts_on(:tags)
     @search  = @listing.location_address
     @search_listing = Listing.find_by_sql("select title from listings where location_address = '#{@search}'")
-
+	@profile = Profile.find_by_user_id(@listing[:user_id])
+	
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # show.html.erb      
       format.json { render json: @listing }
     end
   end
@@ -41,8 +43,12 @@ class ListingsController < ApplicationController
   def edit
    @puts = Listing.find(params[:id]).user_id
      if @puts ==current_user.id
-    @listing = Listing.find(params[:id])
-    @values = Value.all
+		@listing = Listing.find(params[:id])
+		@values = Value.all
+		@food_restrictions = Array.new()
+		@listing.tag_ids.each do |f|   
+		  @food_restrictions.push(f)    
+		end
      else 
       redirect_to listings_path, :notice =>"no suffiecient privilage"
      end
