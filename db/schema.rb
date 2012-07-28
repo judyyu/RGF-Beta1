@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120515104950) do
+ActiveRecord::Schema.define(:version => 20120728003519) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -100,7 +100,7 @@ ActiveRecord::Schema.define(:version => 20120515104950) do
     t.integer  "no_of_guests"
     t.integer  "no_of_guests_attending"
     t.integer  "user_id"
-    t.string   "address"
+    t.string   "address1"
     t.boolean  "gmaps"
     t.integer  "event_category_id"
     t.string   "ev_pot",                   :default => "N/A"
@@ -123,6 +123,7 @@ ActiveRecord::Schema.define(:version => 20120515104950) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.integer  "lis_tings_swap_behaviour"
+    t.string   "address2"
   end
 
   create_table "food_categories", :force => true do |t|

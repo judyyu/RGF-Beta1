@@ -1,21 +1,12 @@
-<div style ="background:#ffffff;border:3px solid #ffffff;border-radius:8px;padding:20px">
-<style>
-.floatright { float: right; padding-top:3px;padding-left:3px;padding-right:3px;border:2px solid #fff;border-radius:8px;background:#000 }
-.content p{font-family: 'ubuntu', sans-serif}
-</style>
-
-<link href='http://fonts.googleapis.com/css?family=Russo+One' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Averia+Libre' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Chau+Philomene+One' rel='stylesheet' type='text/css'>
-
-<div class ="floatright">
+<div class ="pull-right">
 <% if @listing.photo.exists? then %>
 	<%= image_tag(@listing.photo.url(:small)) %>
 <% end %>
 </div>
-<br>
+
+<% if user_signed_in? %>
 <b>
- <% if @listing.user_id == current_user.id %>
+<% if @listing.user_id == current_user.id %>
   <%= link_to 'Edit', edit_listing_path(@listing),  :class => 'btn btn-success' %> 
   <%= link_to 'Remove', @listing, :confirm => 'Are you sure?', :method => :delete,  :class => 'btn btn-success' %> 
   <%= link_to 'View All Listings', listings_path, :class => 'btn btn-success' %>
@@ -23,6 +14,7 @@
   <%= link_to 'View All Listings', listings_path, :class => 'btn btn-mini' %>
 <% end %>
 </b>
+<%end%>
 
 <div class ="content">
 <br><br>
@@ -31,14 +23,14 @@
 
 <p>
 <b>Food category:</b>
-  <%= @listing.food_category.name %>
+  <%= @listing.food_category.name if !@listing.food_category.nil?%>
 </p>
 <br>
 
 <p>
 <b>Description:</b>
   <%= @listing.description.html_safe %>
-</p>
+</p>if !@listing.food_category.nil?
 <br>
 
 <p>
@@ -71,7 +63,7 @@
 
 <p>
 <b>Suggested Storage:</b>
-<%= @listing.eat_by_date.name %>
+<%= @listing.eat_by_date.name if !@listing.eat_by_date.nil? %>
 </p>
 <hr>
 
@@ -84,6 +76,9 @@
   <b> 
 	<%= pluralize(@listing.comments.size, 'comment') %>
   </b>
+  <% if !user_signed_in? %>
+	<%= link_to 'Log in to add comments', new_user_session_path, :class=>'top_btn_underline' %>
+  <% end %>
   <br>
 <style>
 
@@ -118,37 +113,44 @@ color:#000000;
 </style>
 
 <% for comment in @listing.comments %>
- <% if user_signed_in? %>
-
+<% if user_signed_in? %>
 <div id ="comment">
+	 <div id ="avatar" style ="padding-left:25px;padding:20px;">
+		  <% unless @comment.listing.user.profile.photo? %>
+			  <%= image_tag("../images/gravatar-60-giveo.jpg",:size =>"50x50") %>
+		  <% else %>
+			 <%= image_tag @comment.listing.user.profile.photo.url(:profile)  %>
+		  <% end %>
 
-<div id ="avatar" style ="padding-left:25px;padding:20px;">
-      <% unless @comment.listing.user.profile.photo? %>
-          <%= image_tag("../images/gravatar-60-giveo.jpg",:size =>"50x50") %>
-      <% else %>
-         <%= image_tag @comment.listing.user.profile.photo.url(:profile)  %>
+		  <!--<strong style  = color:blue>
+			 <%= h comment.user.email  %>
+		 </strong>-->
+		 <em>on <%= comment.created_at.strftime('%b %d, %Y at %H:%M') %></em>
+	</div>
+	<div id ="content">
+		<%=  comment.body.html_safe %><hr />
+		<% if comment.user_id == current_user.id %>
+		 <b><%= link_to 'Edit Comment', edit_comment_path(comment) %></b>
+		<% end %>
+	</div>
+<% else %>
+	<div id ="avatar" style ="padding-left:25px;padding:20px;">
+		  <% unless @comment.listing.user.profile.photo? %>
+			  <%= image_tag("../images/gravatar-60-giveo.jpg",:size =>"50x50") %>
+		  <% else %>
+			 <%= image_tag @comment.listing.user.profile.photo.url(:profile)  %>
+		  <% end %>
+		  
+		 <em>on <%= comment.created_at.strftime('%b %d, %Y at %H:%M') %></em>
+	</div>
+	<div id ="content">
+		<%=  comment.body.html_safe %><hr />	
+	</div>
 <% end %>
 
-      <strong style  = color:blue>
-         <%= h comment.user.email  %>
-     </strong>
-
-      <em>on <%= comment.created_at.strftime('%b %d, %Y at %H:%M') %></em>
-
-</div>
-
-<div id ="content">
-    <%=  comment.body.html_safe %><hr />
-<% if comment.user_id == current_user.id %>
- <b><%= link_to 'Edit Comment', edit_comment_path(comment) %></b>
 <% end %>
 
 </div>
-  <% end %>
-</div>
-
-<% end %>
+<% if user_signed_in? %>
 <%= render :partial => 'comments/form' %>
-
-
-</div>
+<%end%>

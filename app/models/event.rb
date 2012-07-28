@@ -1,7 +1,7 @@
 class Event < ActiveRecord::Base
 
   has_many :user_to_events
-  has_many :groups  
+#  has_many :groups  
 #  has_many :potlucks
   has_many :member_attending_event_registers, :dependent => :destroy
   has_many :users, :through => :member_attending_event_registers
@@ -28,11 +28,11 @@ class Event < ActiveRecord::Base
    geocoded_by :event_address
    #geocoded_by :address   # can also be an IP address
    after_validation :geocode          # auto-fetch coordinates
-   reverse_geocoded_by :latitude, :longitude
-   after_validation :reverse_geocode  # auto-fetch address
+   #reverse_geocoded_by :latitude, :longitude
+   #after_validation :reverse_geocode  # auto-fetch address
 
 
-geocoded_by :event_address
+#geocoded_by :event_address
 
 def event_address
   [street, city, state, zip, country].compact.join(', ')

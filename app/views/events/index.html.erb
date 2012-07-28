@@ -90,4 +90,6 @@
 
 <br />
 <% end %>
+<% if user_signed_in? %>
 <h3><%= link_to 'New Event', new_event_path, :class => 'btn btn-mini btn-danger' %></h3>
+<%end%>

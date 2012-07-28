@@ -31,14 +31,14 @@
 
 <p>
 <b>Food category:</b>
-  <%= @listing.food_category.name %>
+  <%= @listing.food_category.name if !@listing.food_category.nil?%>
 </p>
 <br>
 
 <p>
 <b>Description:</b>
   <%= @listing.description.html_safe %>
-</p>
+</p>if !@listing.food_category.nil?
 <br>
 
 <p>
@@ -71,7 +71,7 @@
 
 <p>
 <b>Suggested Storage:</b>
-<%= @listing.eat_by_date.name %>
+<%= @listing.eat_by_date.name if !@listing.eat_by_date.name.nil? %>
 </p>
 <hr>
 
@@ -126,7 +126,7 @@ color:#000000;
       <% unless @comment.listing.user.profile.photo? %>
           <%= image_tag("../images/gravatar-60-giveo.jpg",:size =>"50x50") %>
       <% else %>
-         <%= image_tag current_user.profile.photo.url(:profile)  %>
+         <%= image_tag @comment.listing.user.profile.photo.url(:profile)  %>
 <% end %>
 
       <strong style  = color:blue>

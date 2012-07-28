@@ -31,9 +31,9 @@
 	<%= link_to "Sign In", new_user_session_path  %>
 	<% end %>
 	</li>	
-	
+	<% if user_signed_in? %>
 	<div style="float:right;height:20px;">
-		<% if user_signed_in? %>	
+			
 		<% unless current_user.profile.nil? %>
 		<ul class="nav nav-pills">
 			<li class="dropdown" style ="color:white;float:right;">
@@ -49,14 +49,12 @@
 		  </ul>
 		</li>
 		</ul>	   
-	    <% end %>              
-    <% end %>		
+	    <% end %>
 	</div>
-
+	<% end %>	
 	</ul>
 		
  </div>
-
 
 
 <div class="row">
