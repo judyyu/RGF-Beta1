@@ -1,13 +1,19 @@
 class ProfilesController < ApplicationController
+  #authorize_resource :only => [:index]
   # GET /profiles
   # GET /profiles.json
   def index
-    @profiles = Profile.all
+    #@profiles = Profile.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @profiles }
-    end
+    #respond_to do |format|
+    #  format.html # index.html.erb
+    #  format.json { render json: @profiles }
+    #end
+    if signed_in?
+		redirect_to profile_path(current_user)
+	else
+		redurect_to root_url
+	end
   end
 
   # GET /profiles/1
@@ -15,7 +21,7 @@ class ProfilesController < ApplicationController
   def show
     @profile = Profile.find(params[:id])
     #@groups = Group.find(:all, :order => "id desc", :limit => 5).reverse
-    @groups = Group.limit(5).order('id desc')
+    #@groups = Group.limit(5).order('id desc')
 
     respond_to do |format|
       format.html # show.html.erb

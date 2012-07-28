@@ -90,8 +90,10 @@
 	</ul>
 
 	<!-- featured content -->
-	<div class="hero-unit-rgf">		
-		<%= link_to "Register", new_user_registration_path, {:class=>"splash-btn  btn-primary btn-large"} %>		<%= link_to "New to this site?", new_to_this_path, {:class=>"splash-btn  btn-primary btn-large"} %>		
+	<div class="hero-unit-rgf">	
+		<% if !user_signed_in? %>	
+		<%= link_to "Register", new_user_registration_path, {:class=>"splash-btn  btn-primary btn-large"} %><% end %>			
+		<%= link_to "New to this site?", new_to_this_path, {:class=>"splash-btn  btn-primary btn-large"} %>		
 		<br>
 	</div>
 

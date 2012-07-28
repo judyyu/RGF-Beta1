@@ -68,7 +68,7 @@ td.adjacent {
         <b style ="color:#FF8C00"> <%= @user_pending.count %> pending </b>)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-      <b>Places Left : <%= (@event.food_for_people)-(@event.no_of_guests_attending) %></b><br><br><br>
+      <b>Places Left : <%= (@event.food_for_people) + ' ' +(@event.no_of_guests_attending) %></b><br><br><br>
 
 <u><strong>Members of this event</strong></u><br>
 <% @event.user_to_events.each do |e| %>

@@ -71,27 +71,30 @@
 </div>
 
 <div class="span9" style="margin-top:10px;">	
-
 	<!-- nav -->
 	<ul class="nav nav-tabs">
 			<li class="active"><a href="/">Home</a></li>
                         <li><%= link_to "Events", events_path %></li>
                         <li><%= link_to "Listings", listings_path %></li>
                         <li><%= link_to "Groups", groups_path %></li>
- 			<li><%= link_to "Blog", blogs_path  %></li>
+						<!--<li><%= link_to "Blog", blogs_path  %></li>-->
 
 			<div style="float:right;padding-top:10px;">
 			<% if user_signed_in? %>			
-			<%= link_to 'My Profile', profile_path(current_user.profile.slug), :class=>'top_btn_underline' %> <a class="top_btn_underline" href="/users/settings">Settings</a>  <a class="top_btn_underline" href="/users/logout">Logout</a> 
+			<%= link_to 'My Profile', profile_path(current_user), :class=>'top_btn_underline' %> 
+			<%= link_to 'Settings', edit_profile_path(current_user), :class=>'top_btn_underline' %> 
+			<%= link_to 'Log Out', destroy_user_session_path, :class=>'top_btn_underline' %>  
 			<% else %>
-			<%= link_to 'Sign In', '/users/sign_in', :class=>'top_btn_underline' %>
+			<%= link_to 'Sign In', new_user_session_path, :class=>'top_btn_underline' %>
 			<%end %>
 			</div>
 	</ul>
 
 	<!-- featured content -->
-	<div class="hero-unit-rgf">		
-		<%= link_to "Register", new_user_registration_path, {:class=>"splash-btn  btn-primary btn-large"} %>		<%= link_to "New to this site?", new_to_this_path, {:class=>"splash-btn  btn-primary btn-large"} %>		
+	<div class="hero-unit-rgf">	
+		<% if !user_signed_in? %>	
+		<%= link_to "Register", new_user_registration_path, {:class=>"splash-btn  btn-primary btn-large"} %><% end %>			
+		<%= link_to "New to this site?", new_to_this_path, {:class=>"splash-btn  btn-primary btn-large"} %>		
 		<br>
 	</div>
 

@@ -17,28 +17,27 @@
 </div>
 
 <div class="span9" style="margin-top:10px;">	
-<% put controller.controller_name if Rails.env.development? %>
 	<!-- nav -->
 	<ul class="nav nav-tabs">
 	<li><a href="/">Home</a></li>
         <li <% if  controller.controller_name =='events' %>class="active"<%end%>><%= link_to "Events", events_path %></li>
         <li <% if  controller.controller_name =='listings' %>class="active"<%end%>><%= link_to "Listings", listings_path %></li>
         <li <% if  controller.controller_name =='groups' %>class="active"<%end%>><%= link_to "Groups", groups_path %></li>
- 	<li <% if  controller.controller_name =='blogs' %>class="active"<%end%>><%= link_to "Blog", blogs_path  %></li>
-        <li <% if controller.controller_name =='sessions' or controller.controller_name =='registrations' %>class="active"<%end%>>
+ 	<!--<li <% if  controller.controller_name =='blogs' %>class="active"<%end%>><%= link_to "Blog", blogs_path  %></li>-->
+        <li <% if controller.controller_name =='sessions' or controller.controller_name =='registrations' or controller.controller_name =='profile' %>class="active"<%end%>>
 	<% if  user_signed_in? %>
-	<%= link_to "Profile", profiles_path  %>
+	<%= link_to "Profile", profile_path(current_user)  %>
 	<% else %>	
-	<%= link_to "Sign In", profiles_path  %>
+	<%= link_to "Sign In", new_user_session_path  %>
 	<% end %>
 	</li>	
 
 
-	<div style="float:right;padding-top:10px;">
+	<div style="float:right;">
 		<% if user_signed_in? %>	
 		<% unless current_user.profile.nil? %>
 		<ul class="nav nav-pills">
-			<li class="dropdown" style ="color:white;margin-top:9px;margin-left:430px;">
+			<li class="dropdown" style ="color:white;float:right;">
 			<a href="#" data-toggle="dropdown" class="dropdown-toggle"><%= current_user.profile.full_name %> <b class="caret"></b></a>
 			
 				<ul class="dropdown-menu" id="menu1">
@@ -48,14 +47,10 @@
 				<li><%= link_to 'Add a Food Listing', new_listing_path %> </li>
 				<li><%= link_to 'Add an Event', new_event_path %></li>
 				<li class="divider"></li>
-					    <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+				<li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
 		  </ul>
 		</li>
-		</ul>
-	     <% else %>
-	       <li style ="margin-left:430px;"><%= link_to 'LOGIN', new_user_session_path %></li> 
-	       <li><%= link_to 'Register',new_user_registration_path %></li>
-	    </ul>
+		</ul>	   
 	    <% end %>              
     <% end %>		
 	</div>
@@ -90,6 +85,7 @@
 <div class="row">
 <div class="span9"><%= yield %></div>
 </div>
+<div class="row" style="margin-left:200px;"><div class="span9"><%= debug(params) if Rails.env.development? %></div></div>
 
 
     </div> 
