@@ -1,29 +1,26 @@
 RealGoodFood::Application.routes.draw do
 
-  resources :posts
-
-  resources :pages
-
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
-   
+  devise_for :users
+  
+  resources :posts
+  resources :pages
   resources :static_pages 
   #match "/static_pages/*id" => 'static_pages#show', :as => :page, :format => false
  
   #static pages
   match '/new_to_this', :to=>'pages#new_to_this'
+  match '/how_it_works', :to=>'pages#how_it_works'
+  match '/team', :to=>'pages#team'  
+  match '/privacy_policy', :to=>'pages#privacy_policy'
+  match '/terms_and_conditions', :to=>'pages#terms_and_conditions'
 
   get "friends/index"
-
-  resources :blogs
-
   get 'accept_user_to_events' => "user_to_events#accept", :as => 'accept_user_to_event'
   get 'reject_user_to_events' => "user_to_events#reject", :as => 'reject_user_to_event'
  
-  
-  #resources :events
-
   resources :events do
      member do
        #post :rate
@@ -31,7 +28,8 @@ RealGoodFood::Application.routes.draw do
        #get  :tag_cloud
      end
   end
-
+  
+  resources :blogs
   resources :locations
   resources :profiles
   get "comments/show"
