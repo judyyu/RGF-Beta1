@@ -59,14 +59,14 @@ td.adjacent {
 <% else %>
   <%= link_to 'View All Events', events_path, :class => 'btn btn-success' %>
 <% end %>
-<%end>
+<%end%>
 </b>
 
 <br><br>
 <div class ="content">
 <h1><%= @event.name %></h1><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;--- <%= @event.user.profile.full_name %>
-</h1> <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;( <b style ="color:green"> <%= @user_confirmed.count %> members Confirmed</b> |
+    &nbsp;&nbsp;&nbsp;&nbsp; --- <%= @event.user.profile.full_name %>
+</h1> <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;( <b style="color:green"> <%= @user_confirmed.count %> members Confirmed</b> |
         <b style ="color:#FF8C00"> <%= @user_pending.count %> pending </b>)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -74,7 +74,7 @@ td.adjacent {
 
 <u><strong>Members of this event</strong></u><br>
 <% @event.user_to_events.each do |e| %>
- <b style = "line-height:100%;vertical-align: middle;">
+ <b>
      <% if e.state=="accepted"%>
      <%= link_to e.user.profile.full_name, e.user.profile %><br>
      <% end %><% end %>
@@ -88,42 +88,39 @@ td.adjacent {
 <%= link_to "Intersted in joining", join_event_path(:event_id => @event),
                                                         :class => 'btn btn-success' %><br><br>
 <% end %>
-<% end %><br><br><br><br><br><br>
+<% end %><br><br>
 
 
+<div class="row">
+<div class="span2">Description: </div><div class="span5 pull-left"><%= @event.event_description.empty? ?  "No Description" : @event.event_description%></div>
+</div>
 
+<br clear="left">
+<div class = "row">
+<div class="span2"><b>Event type: </b></div><div class="span5 pull-left"><%= @event.event_type.empty? ? "No Event Type" : @event.event_type  %></div>
+</div>
 
-
-
-
-<div class = "content">
-  <p><%= @event.event_description %>
-</p>
-
-<p>
-  <b>Event type:</b>
-  <%= @event.event_type %>
-</p>
 
 <!-- swap --->
-
 <% if @event.event_type =="Swap" %>
+<br clear="left">
+<div class = "row">
+	<div class="span2">Swap: </div>
+	<div class="span5 pull-left">
 
-<p>
+	 <% if @event.lis_tings_swap_behaviour==1 %>
+	   Listings enabled but not required.
+	 <% end %>
 
- <% if @event.lis_tings_swap_behaviour==1 %>
-   Listings enabled but not required.
- <% end %>
+	 <% if @event.lis_tings_swap_behaviour==2 %>
+	   Listings enabled but not required.
+	 <% end %>
 
- <% if @event.lis_tings_swap_behaviour==2 %>
-   Listings enabled but not required.
- <% end %>
-
- <% if @event.lis_tings_swap_behaviour==3 %>
-   Listings not enabled.
- <% end %>
-
-</p>
+	 <% if @event.lis_tings_swap_behaviour==3 %>
+	   Listings not enabled.
+	 <% end %>
+	</div>
+</div>
 <hr>
 
 <p>
@@ -213,6 +210,7 @@ td.adjacent {
 
 
 <% end %>
+
 <!--<p>
   <b>Location:</b>
   <%= @event.location_id %>

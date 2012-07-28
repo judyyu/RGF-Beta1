@@ -7,8 +7,7 @@ RealGoodFood::Application.routes.draw do
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
-  devise_for :users
-  
+   
   resources :static_pages 
   #match "/static_pages/*id" => 'static_pages#show', :as => :page, :format => false
  

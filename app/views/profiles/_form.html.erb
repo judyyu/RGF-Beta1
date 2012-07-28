@@ -67,10 +67,14 @@ background-color: #006DCC;
 
   <b>Food Restriction </b>
   <% for rest in FoodRestriction.find(:all) %>
-    <p><%= check_box_tag( 'profile[value_ids][]',  rest.id,
-       :onClick => "$$('#my_form input.check').each(function(box){box.checked=($('check_all').checked)?true:false});")%>
+   <br><!--<%= check_box_tag( 'profile[value_ids][]',  rest.id,
+       :onClick => "$$('#my_form input.check').each(function(box){box.checked=($('check_all').checked)?true:false});")%>-->
+       <%= check_box_tag( 'profile[value_ids][]',  rest.id,
+       :onClick => "$$('#my_form input.check').each(function(box){box.checked=($('check_all').checked)?false:true});")%>
        <%= rest.name %></p>
-  <% end %>  <td>
+
+  <% end %> 
+<td>
 <td style="margin:10px;padding-left:200px;padding-right:50px;border:0px solid blue;color:darkgreen;    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);">
 A multistep form, also known as a wizard, is a large form that has been split up into a series of pages that users can navigate through to complete the form. Not everyone is a fan of this approach, some people prefer </td>
 </tr>

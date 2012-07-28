@@ -1,4 +1,5 @@
 <div class ="pull-right">
+
 <% if @listing.photo.exists? then %>
 	<%= image_tag(@listing.photo.url(:small)) %>
 <% end %>
@@ -23,14 +24,14 @@
 
 <p>
 <b>Food category:</b>
-  <%= @listing.food_category.name if !@listing.food_category.nil?%>
+  <%= @listing.food_category.nil? ? "No category" : @listing.food_category.name %>
 </p>
 <br>
 
 <p>
 <b>Description:</b>
   <%= @listing.description.html_safe %>
-</p>if !@listing.food_category.nil?
+</p>
 <br>
 
 <p>

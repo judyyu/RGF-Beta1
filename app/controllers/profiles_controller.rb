@@ -10,7 +10,12 @@ class ProfilesController < ApplicationController
     #  format.json { render json: @profiles }
     #end
     if signed_in?
-		redirect_to profile_path(current_user)
+		 pro = Profile.where(:user_id => params[:id])
+		if pro != nil
+			redirect_to profile_path(current_user)
+		else
+			redirect_to new_profile_path			
+		end
 	else
 		redurect_to root_url
 	end
@@ -19,14 +24,22 @@ class ProfilesController < ApplicationController
   # GET /profiles/1
   # GET /profiles/1.json
   def show
-    @profile = Profile.find(params[:id])
+    pro = Profile.where(:user_id => params[:id])
+    
+    
+	if pro != nil
+		@profile = Profile.find(params[:id])
+		 respond_to do |format|
+		  format.html # show.html.erb
+		  format.json { render json: @profile }
+		end
+    else
+		redirect_to new_profile_path
+    end
     #@groups = Group.find(:all, :order => "id desc", :limit => 5).reverse
     #@groups = Group.limit(5).order('id desc')
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @profile }
-    end
+   
   end
 
   # GET /profiles/new

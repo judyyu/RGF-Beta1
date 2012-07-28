@@ -6,6 +6,7 @@
 	<%= stylesheet_link_tag "rgf.css" %>
         <%= stylesheet_link_tag "facebox.css" %>
 	<%= javascript_include_tag "facebox.js" %>
+	<%= javascript_include_tag :defaults%>	
 	<%= javascript_include_tag "bootstrap/js/bootstrap.min.js" %>
 	<%= stylesheet_link_tag "bootstrap/css/bootstrap.css" %>
 	<%= stylesheet_link_tag "MyFontsWebfontsKit.css" %>
@@ -19,7 +20,7 @@
 					backdrop:static});
 	});*/
 
-	jQuery(document).ready(function($) {
+	/*jQuery(document).ready(function($) {
 		if ($("#selected_location").val()==''){
 		  	$("a[rel*=facebox]").facebox();
 			$.facebox("#info","facebox",true);
@@ -36,7 +37,7 @@
 			$(document).trigger('close.facebox');		
 		
 		});
-	});
+	});*/
 	</script>
 
 	<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -83,7 +84,7 @@
 			<% if user_signed_in? %>			
 			<%= link_to 'My Profile', profile_path(current_user), :class=>'top_btn_underline' %> 
 			<%= link_to 'Settings', edit_profile_path(current_user), :class=>'top_btn_underline' %> 
-			<%= link_to 'Log Out', destroy_user_session_path, :class=>'top_btn_underline' %>  
+			<%= link_to 'Log Out', destroy_user_session_path, :method=> :delete, :class=>'top_btn_underline' %>  
 			<% else %>
 			<%= link_to 'Sign In', new_user_session_path, :class=>'top_btn_underline' %>
 			<%end %>
@@ -100,35 +101,35 @@
 
 	<div class="row">	
 	   <div class="span3">      
-		<%= link_to image_tag("food.png"), listings_path %> 
-		<h3><%= link_to "Discover and Eat Food", listings_path %></h3> 
-	      	<p>Find Food, Be a locavore or Share your food creations with your local community. Spread love, kindness and brotherhood</a> </p> 
+			<%= link_to image_tag("food.png"), listings_path %> 
+			<h3><%= link_to "Discover and Eat Food", listings_path %></h3> 
+	      	<p>Post your homemade muffins or homegrown produce here, or browse what’s delicious, homemade, and local. Negotiate swaps.</a> </p> 
 
 		
 	   </div>
 
 	   <div class="span3">
-	       <a href="/events"><%=link_to image_tag("cal.png"), events_path %></a> 
+	       <%=link_to image_tag("cal.png"), events_path %> 
 	       <h3><%= link_to "Create and Attend Events", events_path %></h3> 
-	      <p>Find events happening near you, attend cook offs, learn recipes or host one to flaunt what you cook the best. </p> 
+	      <p>Arrange a potluck, food swap, cooking class or other food event and invite your friends, neighbors or fellow RGF users. Or, see what’s going on in your community and meet other RGFers.</p> 
 	    </div>
 
 	    <div class="span3">
-	       <a href="/groups"><%=link_to image_tag("group.png"), groups_path %></a> 
+	       <%=link_to image_tag("group.png"), '#' %>
 	       <h3><%= link_to "Join or Start a Group", groups_path %></h3> 
-	      <p>Create a food community in your area, be a food activist or join an existing movment. Enjoy lovely food all the time </p> 	       
+	      <p>Found the perfect swapping partners? Form a group to trade regularly with neighbors, friends, or those with similar food interests. </p> 	       
 	    </div>
 	</div>
 	<br>
 	<div class="row">
 		<div class="span3">
-			<a href="/listings" class="button yellow">GO</a>   
+			<%= link_to "GO", listings_path, :class=>"button yellow"  %> 
 		</div>
 		<div class="span3">
-			<a href="/events" class="button yellow">GO</a> 
+			<%= link_to "GO", events_path, :class=>"button yellow"  %>  
 		</div>
 		<div class="span3">
-			<a href="/groups" class="button yellow">GO</a>
+			<%= link_to "Coming Soon", '#', :class=>"button gray disabled"  %> 
 		</div>
 	</div>
 <br clear="left">

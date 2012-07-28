@@ -1,6 +1,7 @@
 
 <h1><%= @profile.full_name %></h1>
 <% if @profile.user_id != current_user.id %>
+<%= current_user.id %>
 <% else %>
 <h6>[<%= link_to 'Edit Profile', edit_profile_path(@profile) %>]</h6>
 <% end %>
@@ -8,14 +9,14 @@
 
 <div class ="floatright">
 <% if @profile.photo.exists? then %>
-<!--
 <pre><%= image_tag(@profile.photo.url(:small)) %></pre>
--->
-<h3>About your cooking interests</h3>
+
+<b>About your cooking interests</b>
   <b><%= @profile.about_me %></b>
 <% else %>
-   <!-- <pre> <%= image_tag("../images/gravatar-60-giveo.jpg",:size=>"200x200") %> -->
-<h3>About your cooking interests</h3>
+   <!-- <%= image_tag("../images/gravatar-60-giveo.jpg",:size=>"200x200") %> -->
+   <pre> 
+   <h3>About your cooking interests</h3>
   <b><%= @profile.about_me %></b></pre>
 <% end %>
 </div>
@@ -48,9 +49,10 @@
 
 </p>
 
+<% if !@profile.location.nil? %>
 <p style = "border:3px solid #333333;width:400px;padding:0px;border-radius:8px;"><%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=14&markers=#{@profile.location.latitude}%2C#{@profile.location.longitude}" %></p>
 <%= link_to "Edit My Location", edit_location_path(@profile.location),  :class => 'btn btn-success'%>
-
+<% end %>
 <br><br>
 <h1>Nearby Groups </h1>
 
