@@ -13,6 +13,7 @@ group :production do
         gem 'thin'
 end
 gem 'heroku'
+gem 'tlsmail'
 gem 'execjs'
 gem 'therubyracer'
 gem 'devise'

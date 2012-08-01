@@ -14,8 +14,23 @@ RealGoodFood::Application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send
-  config.action_mailer.raise_delivery_errors = false
-
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default_url_options = {:host => 'localhost:3000'}
+  #config.action_mailer.delivery_method = :sendmail
+  #config.action_mailer.delivery_method = :smtp
+  ActionMailer::Base.delivery_method = :smtp
+  #config.action_mailer.smtp_settings = {
+  ActionMailer::Base.smtp_settings = {
+   :enable_starttls_auto =>true,
+   :address => 'smtp.gmail.com',
+   :port => 587,
+   :authentication => "plain",
+   :domain => 'realgoodfood.org',
+   :user_name => 'judytestemail@gmail.com',
+   :password => 'MyGmailPass'
+  }
+  config.action_mailer.default_url_options ={:host => 'RGF@realgoodfood.org'}
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
@@ -33,5 +48,5 @@ RealGoodFood::Application.configure do
   config.assets.compress = false
 
   # Expands the lines which load the assets
-  config.assets.debug = true
+  config.assets.debug = false
 end
