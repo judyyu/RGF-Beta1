@@ -12,7 +12,7 @@
 
 <div class="hero-unit-internal">
 <div class ="pull-right">
-<% if @listing.photo.exists? then %>
+<% if @listing.photo.exists? %>
 	<%= image_tag(@listing.photo.url(:small)) %>
 <% end %>
 </div>
@@ -127,10 +127,13 @@ color:#000000;
 			 <%= image_tag comment.user.profile.photo.url(:profile)  %>			
 		  <% end %>
 
-		 <!--<strong style  = color:blue>
-			 <%= h comment.user.email  %>
-		 </strong>-->
-		 <%= link_to comment.user.profile.full_name, profile_path(comment.user.profile) %>
+		<% fullname = comment.user.profile.try{ |l| "{#l.full_name}"}  %> 
+		<% if fullname.nil?  %>
+			<%=  "No Name" %>
+		<% else %>
+			<%= link_to comment.user.profile.full_name, profile_path(comment.user.profile.slug)%>
+		<% end%>
+		 
 		 <br>
 		 <em><%= comment.created_at.strftime('%m/%d/%y at %h:%M') %></em>
 	</div>
@@ -147,11 +150,21 @@ color:#000000;
 		   <% if !defined? listing.user.profile.photo%>
 			  <%= image_tag("../images/gravatar-60-giveo.jpg",{:size =>"50x50", :class=>"pull-left"}) %>			  
 		  <% else %>
-			 <% if !comment.user.profile.photo.nil? %>
-			 <%= image_tag comment.user.profile.photo.url(:profile)  %>
-			 <% end %>
+			 
+			 <% comment_photo = comment.user.profile.photo.try{ |p| "{#l.url}"}  %> 
+			<% if !comment_photo.nil?  %>
+			    <% image_to_user = image_tag comment.user.profile.photo.url(:profile)  %> 	
+				<%= link_to image_to_user, profile_path(comment.user.profile.slug)%>
+			<% end%>
+			 
+			 
 		  <% end %>
-		  <%= link_to comment.user.profile.full_name, profile_path(comment.user.profile) %>
+			<% fullname = comment.user.profile.try{ |l| "{#l.full_name}"}  %> 
+			<% if fullname.nil?  %>
+				<%=  "No Name" %>
+			<% else %>
+				<%= link_to comment.user.profile.full_name, profile_path(comment.user.profile.slug)%>
+			<% end%>
 		  <br>
 		   <em><%= comment.created_at.strftime('%m/%d/%y at %h:%M') %></em>
 	</div>
