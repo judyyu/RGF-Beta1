@@ -109,15 +109,17 @@ color:#000000;
 </style>
 
 <% for comment in @listing.comments %>
+<br clear="left">
 <div id ="comment">
 <% if user_signed_in? %>
-	<% unless comment.user.nil? %>
 	 <div id ="avatar" style ="padding-left:25px;padding:20px;">
 	
-		  <% unless comment.user.profile.photo? %>
+		  <% unless comment.user.profile.nil? %>
 			  <%= image_tag("../images/gravatar-60-giveo.jpg",{:size =>"50x50", :class=>"pull-left"}) %>
 		  <% else %>
+			 <% if !comment.user.profile.photo.nil? %>
 			 <%= image_tag comment.user.profile.photo.url(:profile)  %>
+			 <% end %>
 		  <% end %>
 
 		 <!--<strong style  = color:blue>
@@ -134,16 +136,15 @@ color:#000000;
 		 <b><%= link_to 'Edit Comment', edit_comment_path(comment) %></b>
 		<% end %>
 	</div>
-	<% end %>
 <% else %>
-	<% unless comment.user.nil? %>
 	<div id ="avatar" style ="padding-left:25px;padding:20px;">
 	
-		  <% unless comment.user.profile.photo? %>
+		  <% unless comment.user.profile.nil? %>
 			  <%= image_tag("../images/gravatar-60-giveo.jpg",{:size =>"50x50", :class=>"pull-left"}) %>			  
 		  <% else %>
+			 <% if !comment.user.profile.photo.nil? %>
 			 <%= image_tag comment.user.profile.photo.url(:profile)  %>
-
+			 <% end %>
 		  <% end %>
 		  <%= link_to comment.user.profile.full_name, profile_path(comment.user.profile) %>
 		  <br>
@@ -152,12 +153,11 @@ color:#000000;
 	<div id ="content">
 		<%=  comment.body.html_safe %><hr />	
 	</div>
-	<% end %>
 <% end %>
 </div>
 <% end %>
 
-<br clear="left">
+
 <% if user_signed_in? %>
 <%= render :partial => 'comments/form' %>
 <%end%>
