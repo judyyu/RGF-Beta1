@@ -74,6 +74,7 @@
 </style>
 
 <% @events.each do |event| %>
+
     <div class="wrap">
     <div class="container">
         <div class="box">
@@ -86,7 +87,10 @@
    <p style ="font-size:14px;"><%=h truncate(event.event_description, :length => 200).html_safe %></p>
       <b><%= link_to "more >>", event %></b><br>
 
-</div></div>
+</div>
+
+<br clear="left">
+</div>
 
 <br />
 <% end %>

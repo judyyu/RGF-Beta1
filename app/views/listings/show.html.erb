@@ -111,10 +111,10 @@ color:#000000;
 <% for comment in @listing.comments %>
 <div id ="comment">
 <% if user_signed_in? %>
-
+	<% unless comment.user.nil? %>
 	 <div id ="avatar" style ="padding-left:25px;padding:20px;">
 	
-		  <% unless comment.user.profile.photo.nil? %>
+		  <% unless comment.user.profile.photo? %>
 			  <%= image_tag("../images/gravatar-60-giveo.jpg",{:size =>"50x50", :class=>"pull-left"}) %>
 		  <% else %>
 			 <%= image_tag comment.user.profile.photo.url(:profile)  %>
@@ -134,9 +134,12 @@ color:#000000;
 		 <b><%= link_to 'Edit Comment', edit_comment_path(comment) %></b>
 		<% end %>
 	</div>
+	<% end %>
 <% else %>
+	<% unless comment.user.nil? %>
 	<div id ="avatar" style ="padding-left:25px;padding:20px;">
-		  <% unless comment.user.profile.photo.nil? %>
+	
+		  <% unless comment.user.profile.photo? %>
 			  <%= image_tag("../images/gravatar-60-giveo.jpg",{:size =>"50x50", :class=>"pull-left"}) %>			  
 		  <% else %>
 			 <%= image_tag comment.user.profile.photo.url(:profile)  %>
@@ -149,6 +152,7 @@ color:#000000;
 	<div id ="content">
 		<%=  comment.body.html_safe %><hr />	
 	</div>
+	<% end %>
 <% end %>
 </div>
 <% end %>
