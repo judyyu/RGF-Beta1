@@ -54,8 +54,8 @@
         <div class="box">
         <% pic = listing.try{ |p| "{#p.photo}"}  %>
         <% if !pic.nil? %>
-        <!--<%= image_tag(listing.photo.url(:small)) %>-->
-	    <%= link_to image_tag(listing.photo.url(:thumb)),listing  %>
+        <%= link_to image_tag(listing.photo.url(:small)),listing %>
+	    <!--<%= link_to image_tag(listing.photo.url(:thumb)),listing  %>-->
         <% end %><br></div>
    <div class="sidebar">
    <b style = "font-size:20px;"><%= link_to listing.title, listing %> </b>

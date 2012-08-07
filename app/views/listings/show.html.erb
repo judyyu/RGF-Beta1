@@ -12,8 +12,8 @@
 
 <div class="hero-unit-internal">
 <div class ="pull-right">
-<% if @listing.photo.exists? %>
-	<%= image_tag(@listing.photo.url(:small)) %>
+<% if !defined?(@listing.photo).nil? %>
+	<%= link_to image_tag(listing.photo.url(:small)),listing %>
 <% end %>
 </div>
 <b><%= @listing.food_category.nil? ? "" : "Food category:  " + @listing.food_category.name %> </b>
