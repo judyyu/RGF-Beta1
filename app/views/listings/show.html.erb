@@ -114,12 +114,10 @@ color:#000000;
 <% if user_signed_in? %>
 	 <div id ="avatar" style ="padding-left:25px;padding:20px;">
 	
-		  <% unless comment.user.profile.nil? %>
-			  <%= image_tag("../images/gravatar-60-giveo.jpg",{:size =>"50x50", :class=>"pull-left"}) %>
-		  <% else %>
-			 <% if !comment.user.profile.photo.nil? %>
-			 <%= image_tag comment.user.profile.photo.url(:profile)  %>
-			 <% end %>
+		  <% if !defined? listing.user.profile.photo%>
+			  <%= image_tag("../images/gravatar-60-giveo.jpg",{:size =>"50x50", :class=>"pull-left"})%>
+		  <% else %>			 
+			 <%= image_tag comment.user.profile.photo.url(:profile)  %>			
 		  <% end %>
 
 		 <!--<strong style  = color:blue>
@@ -139,7 +137,7 @@ color:#000000;
 <% else %>
 	<div id ="avatar" style ="padding-left:25px;padding:20px;">
 	
-		  <% unless comment.user.profile.nil? %>
+		   <% if !defined? listing.user.profile.photo%>
 			  <%= image_tag("../images/gravatar-60-giveo.jpg",{:size =>"50x50", :class=>"pull-left"}) %>			  
 		  <% else %>
 			 <% if !comment.user.profile.photo.nil? %>

@@ -74,25 +74,24 @@
 </style>
 
 <% @events.each do |event| %>
-
     <div class="wrap">
     <div class="container">
         <div class="box">
-        <% if event.photo.exists? then %>
-	  <%= link_to image_tag(event.photo.url(:thumb)),event  %>
-        <% end %><br></div>
+    <% if event.photo.exists? then %>
+	<%= link_to image_tag(event.photo.url(:thumb)),event  %>
+    <% end %><br></div>
    <div class="sidebar">
    <b style = "font-size:20px;"><%= link_to event.name, event %> </b>
+    <br><span class="lite-gray">Listed by:
+		<%= link_to event.user.profile.full_name, profile_path(event.user.profile.slug) unless !defined? event.user.profile%>
+		</span>
         -- <%= time_tag event.event_starting_on, :class => 'btn btn-mini' %><br><br>
    <p style ="font-size:14px;"><%=h truncate(event.event_description, :length => 200).html_safe %></p>
       <b><%= link_to "more >>", event %></b><br>
+	</div>
 
-</div>
 
-<br clear="left">
-</div>
-
-<br />
+</div></div>
 <% end %>
 <% if user_signed_in? %>
 <h3><%= link_to 'New Event', new_event_path, :class => 'btn btn-mini btn-danger' %></h3>
