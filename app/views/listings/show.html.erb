@@ -19,7 +19,14 @@
 <b><%= @listing.food_category.nil? ? "" : "Food category:  " + @listing.food_category.name %> </b>
 <br>
 <h3 style ="color:#3B2501"><%= @listing.title %></h3>
-<br>Listed by : <%= link_to @profile.full_name, profile_path(@profile) %>
+<br>Listed by : 
+<% fullname = @listing.user.profile.try{ |l| "{#l.full_name}"}  %>
+	<% if fullname.nil?  %>
+		<%=  "No Name" %>
+	<% else %>
+		<%= link_to @listing.user.profile.full_name, profile_path(@listing.user.profile.slug) %>
+	<% end%>
+
 </div>
 
 <div class="row ">

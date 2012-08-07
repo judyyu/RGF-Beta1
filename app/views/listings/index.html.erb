@@ -58,7 +58,12 @@
    <div class="sidebar">
    <b style = "font-size:20px;"><%= link_to listing.title, listing %> </b>
    <br><span class="lite-gray">Listed by:
-		<%= link_to listing.user.profile.full_name, profile_path(listing.user.profile.slug) unless !defined? listing.user.profile%>
+		<% fullname = listing.user.profile.try{ |l| "{#l.full_name}"}  
+			if fullname.nil?  %>
+				<%=  "No Name" %>
+			<% else %>
+				<%= link_to listing.user.profile.full_name, profile_path(listing.user.profile.slug) %>
+			<% end%>
 		</span>
         <em><%= time_tag listing.start_date, :class => 'btn btn-mini' %></em>
         
